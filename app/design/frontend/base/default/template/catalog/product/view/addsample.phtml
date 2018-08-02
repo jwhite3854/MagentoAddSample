@@ -1,0 +1,5 @@
+<?php if ( $this->hasSample() ): ?>
+<a href="/add-sample/?product_id=<?php echo $this->getProduct()->getId() ?>" title="Add Sample to Cart">
+	<button type="button" class="button add-sample-button" style="margin:0 0 10px 10px"><span><span><i class="icon-cart"></i> Add Sample</span></span></button>
+</a>
+<?php endif; ?>

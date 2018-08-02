@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <JW_GenerateSamples>
+            <version>1.0.0</version>
+        </JW_GenerateSamples>
+    </modules> 
+
+    <global>
+        <helpers>
+            <jw_generatesamples>
+                <class>JW_GenerateSamples_Helper</class>
+            </jw_generatesamples>
+        </helpers>
+        <blocks>
+        	<jw_generatesamples>
+				<class>JW_GenerateSamples_Block</class>
+            </jw_generatesamples>
+        </blocks>
+        <events>
+        	<catalog_product_save_before>
+            	<observers>
+                	<jw_generatesamples_observer>
+                    	<type>singleton</type>
+                    	<class>JW_GenerateSamples_Model_Observer</class>
+                    	<method>generateSample</method>
+                	</jw_generatesamples_observer>
+            	</observers>
+        	</catalog_product_save_before>
+        </events>
+        <index>
+            <indexer>
+                <samples_generator>
+                    <model>jw_generatesamples/indexer_samples_generator</model>
+                </samples_generator>
+            </indexer>
+        </index>
+        <models>
+            <jw_generatesamples>
+                <class>JW_GenerateSamples_Model</class>
+            </jw_generatesamples>
+        </models>  
+    </global>
+    <crontab>
+        <jobs>
+            <jw_generatesamples>
+                <schedule>
+                    <cron_expr>15 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>jw_generatesamples/observer::process</model>
+                </run>
+            </jw_generatesamples>
+        </jobs>
+    </crontab>
+</config>
